@@ -12,7 +12,7 @@ exports.getEvents = async (req, res) => {
 exports.getEvent = async (req, res) => {
   try {
     const event = await Event.findByPk(req.params.id);
-    if (!event) return res.status(404).json({ error: 'Event not found' });
+    if (!event) return res.status(404).json({ error: 'Événement non trouvé' });
     res.json(event);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -20,7 +20,7 @@ exports.getEvent = async (req, res) => {
 };
 
 exports.createEvent = async (req, res) => {
-  if (req.user.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+  if (req.user.role !== 'admin') return res.status(403).json({ error: 'Administrateur seulement' });
   try {
     const event = await Event.create(req.body);
     res.status(201).json(event);
@@ -30,24 +30,24 @@ exports.createEvent = async (req, res) => {
 };
 
 exports.updateEvent = async (req, res) => {
-  if (req.user.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+  if (req.user.role !== 'admin') return res.status(403).json({ error: 'Administrateur seulement' });
   try {
     const event = await Event.findByPk(req.params.id);
-    if (!event) return res.status(404).json({ error: 'Event not found' });
+    if (!event) return res.status(404).json({ error: 'Événement non trouvé' });
     await event.update(req.body);
     res.json(event);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 exports.deleteEvent = async (req, res) => {
-  if (req.user.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+  if (req.user.role !== 'admin') return res.status(403).json({ error: 'Administrateur seulement' });
   try {
     const event = await Event.findByPk(req.params.id);
-    if (!event) return res.status(404).json({ error: 'Event not found' });
+    if (!event) return res.status(404).json({ error: 'Événement non trouvé' });
     await event.destroy();
-    res.json({ message: 'Event deleted' });
+    res.json({ message: 'Événement supprimé' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -3,7 +3,7 @@ const Event = require('../models/Event');
 const Registration = require('../models/Registration');
 
 exports.getStats = async (req, res) => {
-  if (req.user.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+  if (req.user.role !== 'admin') return res.status(403).json({ error: 'Administrateur seulement' });
   try {
     const userCount = await User.count();
     const eventCount = await Event.count();

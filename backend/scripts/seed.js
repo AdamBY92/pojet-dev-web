@@ -14,7 +14,7 @@ const seed = async () => {
   await Event.create({ title: 'Event 1', description: 'Description 1', date: new Date(), maxParticipants: 10 });
   await Event.create({ title: 'Event 2', description: 'Description 2', date: new Date(Date.now() + 86400000), maxParticipants: 5 });
 
-  console.log('Database seeded');
+  console.log('Base de données alimentée');
   process.exit();
 };
 
