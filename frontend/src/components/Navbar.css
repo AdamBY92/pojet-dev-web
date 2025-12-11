@@ -1,9 +1,13 @@
 .navbar {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  position: sticky;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e5e7eb;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-container {
@@ -18,17 +22,17 @@
 
 .navbar-logo {
   font-size: 1.5rem;
-  font-weight: bold;
-  color: white;
+  font-weight: 700;
+  color: #1a1a1a;
   text-decoration: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: transform 0.2s;
+  transition: color 0.2s ease;
 }
 
 .navbar-logo:hover {
-  transform: scale(1.05);
+  color: #a78bfa;
 }
 
 .navbar-menu {
@@ -36,7 +40,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 1rem;
+  gap: 1.5rem;
   flex: 1;
 }
 
@@ -45,9 +49,18 @@
 }
 
 .navbar-link {
-  color: white;
+  color: #4a4a4a;
   text-decoration: none;
   padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.navbar-link:hover {
+  color: #a78bfa;
+  background: rgba(167, 139, 250, 0.1);
+}
   border-radius: 8px;
   transition: all 0.3s ease;
   font-weight: 500;
@@ -75,29 +88,30 @@
 }
 
 .navbar-user {
-  color: white;
+  color: #4a4a4a;
   font-weight: 500;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
+  background: #f8f9fa;
   border-radius: 8px;
+  border: 1px solid #e5e7eb;
 }
 
 .badge-admin {
-  background-color: #ffd700;
-  color: #333;
+  background: #fef3c7;
+  color: #92400e;
   padding: 0.2rem 0.6rem;
   border-radius: 12px;
   font-size: 0.75rem;
-  font-weight: bold;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
 .navbar-button {
-  background-color: white;
-  color: #667eea;
+  background: #a78bfa;
+  color: white;
   border: none;
   padding: 0.6rem 1.5rem;
   border-radius: 8px;
@@ -105,13 +119,33 @@
   font-weight: 600;
   text-decoration: none;
   display: inline-block;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(167, 139, 250, 0.3);
 }
 
 .navbar-button:hover {
-  background-color: #f0f0f0;
+  background: #8b5cf6;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(167, 139, 250, 0.4);
+}
+
+.navbar-button-secondary {
+  background: transparent;
+  color: #4a4a4a;
+  border: 1px solid #d1d5db;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.navbar-button-secondary:hover {
+  background: #f8f9fa;
+  border-color: #a78bfa;
+  color: #a78bfa;
 }
 
 /* Responsive */

@@ -8,11 +8,11 @@ exports.getEvents = async (req, res) => {
     let where = {};
     
     // Filtre par public/private selon les permissions
-    if (req.user.role !== 'admin') {
+    if (!req.user || req.user.role !== 'admin') {
       where = {
         [Op.or]: [
           { isPublic: true },
-          { createdBy: req.user.id }
+          ...(req.user ? [{ createdBy: req.user.id }] : [])
         ]
       };
     }
@@ -71,7 +71,7 @@ exports.getEvent = async (req, res) => {
     if (!event) return res.status(404).json({ error: 'Événement non trouvé' });
     
     // Vérifier les permissions
-    if (!event.isPublic && event.createdBy !== req.user.id && req.user.role !== 'admin') {
+    if (!event.isPublic && (!req.user || (event.createdBy !== req.user.id && req.user.role !== 'admin'))) {
       return res.status(403).json({ error: 'Accès refusé' });
     }
     

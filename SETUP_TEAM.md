@@ -4,6 +4,13 @@
 - Node.js (version 16+)
 - PostgreSQL (installé et configuré avec un mot de passe)
 
+### Installation de PostgreSQL (si pas déjà fait)
+Sur Windows, installez PostgreSQL via Winget :
+```bash
+winget install PostgreSQL.PostgreSQL.17 --accept-source-agreements --accept-package-agreements
+```
+Vérifiez que le service `postgresql-x64-17` est démarré.
+
 ## Étapes d'Installation
 
 ### 1. Cloner le projet
@@ -25,8 +32,10 @@ psql --version
 psql -U postgres -c "CREATE DATABASE event_management;"
 
 # OU avec le chemin complet (adapter selon votre version)
-& 'C:\Program Files\PostgreSQL\18\bin\psql.exe' -U postgres -c "CREATE DATABASE event_management;"
+& 'C:\Program Files\PostgreSQL\17\bin\psql.exe' -U postgres -c "CREATE DATABASE event_management;"
 ```
+
+**Note pour Windows :** Si vous avez une erreur d'authentification, modifiez le fichier `pg_hba.conf` (dans `C:\Program Files\PostgreSQL\17\data\pg_hba.conf`) pour changer `scram-sha-256` en `trust` pour les lignes `local`, `host 127.0.0.1/32` et `host ::1/128`. Puis redémarrez le service PostgreSQL.
 
 #### c) Configurer le fichier .env
 Dans `backend/.env`, modifier avec **VOTRE** mot de passe PostgreSQL :
@@ -34,6 +43,13 @@ Dans `backend/.env`, modifier avec **VOTRE** mot de passe PostgreSQL :
 DATABASE_URL=postgresql://postgres:VOTRE_MOT_DE_PASSE@localhost:5432/event_management
 JWT_SECRET=super_secret_jwt_key_2025_dev_web_project
 ```
+
+**Alternative pour éviter les problèmes de mot de passe :** Utilisez SQLite en modifiant `.env` :
+```env
+DATABASE_URL=sqlite:./event_management.db
+JWT_SECRET=super_secret_jwt_key_2025_dev_web_project
+```
+Installez sqlite3 : `npm install sqlite3` dans le backend.
 
 ### 3. Installer les dépendances
 
@@ -115,6 +131,7 @@ taskkill /PID [NUMERO_PID] /F
 - PostgreSQL est démarré
 - Le mot de passe dans `.env` est correct
 - Le port 5432 est bien utilisé par PostgreSQL
+- Si erreur d'authentification, suivez la note ci-dessus pour configurer `trust` dans `pg_hba.conf`
 
 ## 📌 Important pour Git
 
