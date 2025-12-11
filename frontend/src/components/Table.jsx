@@ -54,90 +54,92 @@ const DataTable = ({
 
   return (
     <div className="data-table-container">
-      {searchableColumns.length > 0 && (
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Rechercher..."
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setCurrentPage(1);
-            }}
-            className="search-input"
-          />
-        </div>
-      )}
+      <div className="table-inner">
+        {searchableColumns.length > 0 && (
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Rechercher..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="search-input"
+            />
+          </div>
+        )}
 
-      <div className="table-wrapper">
-        <table className="data-table">
-          <thead>
-            <tr>
-              {columns.map((column) => (
-                <th
-                  key={column.key}
-                  onClick={() => column.sortable && handleSort(column.key)}
-                  className={column.sortable ? 'sortable' : ''}
-                >
-                  {column.label}
-                  {column.sortable && sortConfig.key === column.key && (
-                    <span className={`sort-indicator ${sortConfig.direction}`}>
-                      {sortConfig.direction === 'asc' ? ' ▲' : ' ▼'}
-                    </span>
-                  )}
-                </th>
-              ))}
-              {actions && <th>Actions</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedData.length > 0 ? (
-              paginatedData.map((row, idx) => (
-                <tr
-                  key={idx}
-                  onClick={() => onRowClick && onRowClick(row)}
-                  className={onRowClick ? 'clickable' : ''}
-                >
-                  {columns.map((column) => (
-                    <td key={column.key}>
-                      {column.render 
-                        ? column.render(row[column.key], row)
-                        : row[column.key]}
-                    </td>
-                  ))}
-                  {actions && <td className="actions-cell">{actions(row)}</td>}
-                </tr>
-              ))
-            ) : (
+        <div className="table-wrapper">
+          <table className="data-table">
+            <thead>
               <tr>
-                <td colSpan={columns.length + (actions ? 1 : 0)} className="no-data">
-                  Aucune donnée disponible
-                </td>
+                {columns.map((column) => (
+                  <th
+                    key={column.key}
+                    onClick={() => column.sortable && handleSort(column.key)}
+                    className={column.sortable ? 'sortable' : ''}
+                  >
+                    {column.label}
+                    {column.sortable && sortConfig.key === column.key && (
+                      <span className={`sort-indicator ${sortConfig.direction}`}>
+                        {sortConfig.direction === 'asc' ? ' ▲' : ' ▼'}
+                      </span>
+                    )}
+                  </th>
+                ))}
+                {actions && <th>Actions</th>}
               </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      {totalPages > 1 && (
-        <div className="pagination">
-          <button
-            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-            disabled={currentPage === 1}
-          >
-            ← Précédent
-          </button>
-          <span className="page-info">
-            Page {currentPage} sur {totalPages}
-          </span>
-          <button
-            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-            disabled={currentPage === totalPages}
-          >
-            Suivant →
-          </button>
+            </thead>
+            <tbody>
+              {paginatedData.length > 0 ? (
+                paginatedData.map((row, idx) => (
+                  <tr
+                    key={idx}
+                    onClick={() => onRowClick && onRowClick(row)}
+                    className={onRowClick ? 'clickable' : ''}
+                  >
+                    {columns.map((column) => (
+                      <td key={column.key}>
+                        {column.render 
+                          ? column.render(row[column.key], row)
+                          : row[column.key]}
+                      </td>
+                    ))}
+                    {actions && <td className="actions-cell">{actions(row)}</td>}
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={columns.length + (actions ? 1 : 0)} className="no-data">
+                    Aucune donnée disponible
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-      )}
+
+        {totalPages > 1 && (
+          <div className="pagination">
+            <button
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+            >
+              ← Précédent
+            </button>
+            <span className="page-info">
+              Page {currentPage} sur {totalPages}
+            </span>
+            <button
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+            >
+              Suivant →
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
