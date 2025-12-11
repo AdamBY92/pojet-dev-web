@@ -18,6 +18,10 @@ const Event = sequelize.define('Event', {
     type: DataTypes.DATE,
     allowNull: false,
   },
+  location: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   maxParticipants: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -25,6 +29,29 @@ const Event = sequelize.define('Event', {
   currentParticipants: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
+  },
+  status: {
+    type: DataTypes.ENUM('scheduled', 'ongoing', 'completed', 'cancelled'),
+    defaultValue: 'scheduled',
+  },
+  isPublic: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true,
+  },
+  createdBy: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  categoryId: {
+    type: DataTypes.INTEGER,
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
   },
 });
 
