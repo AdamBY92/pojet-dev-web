@@ -1,12 +1,13 @@
 .App {
   min-height: 100vh;
-  background: linear-gradient(135deg, rgba(240, 248, 255, 0.05) 0%, rgba(248, 250, 252, 0.05) 100%);
+  background: #f8f9fa;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  padding-top: 6rem; /* Account for fixed navbar */
 }
 
 .section {
@@ -20,6 +21,7 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
   transition: box-shadow 0.2s ease;
+  border: 1px solid #e5e7eb;
 }
 
 .card:hover {
@@ -32,10 +34,11 @@
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 2px 8px rgba(167, 139, 250, 0.3);
+  font-size: 1rem;
 }
 
 .btn-primary:hover {
@@ -49,9 +52,10 @@
   border: 1px solid #e2e8f0;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  font-size: 1rem;
 }
 
 .btn-secondary:hover {
@@ -64,7 +68,7 @@
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
   background: #e0f2fe;
   color: #0369a1;
 }
