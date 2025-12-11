@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Table from '../components/Table';
 
 const MyRegistrations = () => {
   const [registrations, setRegistrations] = useState([]);
@@ -33,18 +34,18 @@ const MyRegistrations = () => {
     }
   };
 
+  const headers = ['Title', 'Description'];
+  const data = registrations.map(reg => ({
+    title: reg.Event.title,
+    description: reg.Event.description
+  }));
+
+  const actions = (reg) => <button onClick={() => cancel(reg.id)}>Cancel</button>;
+
   return (
     <div>
       <h2>My Registrations</h2>
-      <ul>
-        {registrations.map(reg => (
-          <li key={reg.id}>
-            <h3>{reg.Event.title}</h3>
-            <p>{reg.Event.description}</p>
-            <button onClick={() => cancel(reg.id)}>Cancel</button>
-          </li>
-        ))}
-      </ul>
+      <Table headers={headers} data={data} actions={actions} />
     </div>
   );
 };

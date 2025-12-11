@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Table from '../components/Table';
 
 const Events = () => {
   const [events, setEvents] = useState([]);
@@ -23,29 +24,29 @@ const Events = () => {
       await axios.post('http://localhost:5000/api/registrations', { eventId }, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      fetchEvents(); // Refresh to update counts
+      fetchEvents();
       alert('Registered successfully');
     } catch (error) {
       alert(error.response?.data?.error || 'Error');
     }
   };
 
+  const headers = ['Title', 'Description', 'Date', 'Participants'];
+  const data = events.map(event => ({
+    title: event.title,
+    description: event.description,
+    date: new Date(event.date).toLocaleDateString(),
+    participants: `${event.currentParticipants}/${event.maxParticipants}`
+  }));
+
+  const actions = (event) => (
+    event.currentParticipants < event.maxParticipants ? <button onClick={() => register(event.id)}>Register</button> : 'Full'
+  );
+
   return (
     <div>
       <h2>Events</h2>
-      <ul>
-        {events.map(event => (
-          <li key={event.id}>
-            <h3>{event.title}</h3>
-            <p>{event.description}</p>
-            <p>Date: {new Date(event.date).toLocaleDateString()}</p>
-            <p>Participants: {event.currentParticipants}/{event.maxParticipants}</p>
-            {event.currentParticipants < event.maxParticipants && (
-              <button onClick={() => register(event.id)}>Register</button>
-            )}
-          </li>
-        ))}
-      </ul>
+      <Table headers={headers} data={data} actions={actions} />
     </div>
   );
 };
