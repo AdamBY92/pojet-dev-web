@@ -145,16 +145,3 @@ const MyRegistrations = () => {
 };
 
 export default MyRegistrations;
-  }));
-
-  const actions = (reg) => <button onClick={() => cancel(reg.id)}>Annuler</button>;
-
-  return (
-    <div>
-      <h2>Mes Inscriptions</h2>
-      <Table headers={headers} data={data} actions={actions} />
-    </div>
-  );
-};
-
-export default MyRegistrations;
