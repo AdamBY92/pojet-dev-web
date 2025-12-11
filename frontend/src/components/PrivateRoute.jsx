@@ -1,14 +1,31 @@
 import { Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const PrivateRoute = ({ children, adminOnly = false }) => {
-  const token = localStorage.getItem('token');
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const { isAuthenticated, isAdmin, loading } = useAuth();
 
-  if (!token) {
+  // Attendre que le contexte soit chargé
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        fontSize: '1.5rem'
+      }}>
+        ⏳ Chargement...
+      </div>
+    );
+  }
+
+  // Vérifier l'authentification
+  if (!isAuthenticated()) {
     return <Navigate to="/login" />;
   }
 
-  if (adminOnly && user.role !== 'admin') {
+  // Vérifier les droits admin si nécessaire
+  if (adminOnly && !isAdmin()) {
     return <Navigate to="/" />;
   }
 
