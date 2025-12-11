@@ -29,10 +29,10 @@ function App() {
   return (
     <div className="App">
       <nav>
-        <Link to="/">Events</Link>
-        {user && <Link to="/my-registrations">My Registrations</Link>}
+        <Link to="/">Événements</Link>
+        {user && <Link to="/my-registrations">Mes Inscriptions</Link>}
         {user?.role === 'admin' && <Link to="/admin">Admin</Link>}
-        {user ? <button onClick={logout}>Logout</button> : <Link to="/login">Login</Link>}
+        {user ? <button onClick={logout}>Déconnexion</button> : <Link to="/login">Connexion</Link>}
       </nav>
       <Routes>
         <Route path="/login" element={<Login />} />

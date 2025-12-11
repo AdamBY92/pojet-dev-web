@@ -22,10 +22,10 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <h2>Admin Dashboard</h2>
-      <p>Users: {stats.userCount}</p>
-      <p>Events: {stats.eventCount}</p>
-      <p>Registrations: {stats.registrationCount}</p>
+      <h2>Tableau de Bord Admin</h2>
+      <p>Utilisateurs: {stats.userCount}</p>
+      <p>Événements: {stats.eventCount}</p>
+      <p>Inscriptions: {stats.registrationCount}</p>
     </div>
   );
 };

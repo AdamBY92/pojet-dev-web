@@ -23,14 +23,14 @@ const Login = () => {
 
   return (
     <div>
-      <h2>{isRegister ? 'Register' : 'Login'}</h2>
+      <h2>{isRegister ? 'Inscription' : 'Connexion'}</h2>
       <form onSubmit={handleSubmit}>
         <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <button type="submit">{isRegister ? 'Register' : 'Login'}</button>
+        <input type="password" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <button type="submit">{isRegister ? 'S\'inscrire' : 'Se connecter'}</button>
       </form>
       <button onClick={() => setIsRegister(!isRegister)}>
-        {isRegister ? 'Already have an account? Login' : 'Need an account? Register'}
+        {isRegister ? 'Déjà un compte ? Se connecter' : 'Besoin d\'un compte ? S\'inscrire'}
       </button>
     </div>
   );

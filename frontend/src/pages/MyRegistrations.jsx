@@ -28,23 +28,23 @@ const MyRegistrations = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchRegistrations();
-      alert('Cancelled');
+      alert('Annulé');
     } catch (error) {
-      alert(error.response?.data?.error || 'Error');
+      alert(error.response?.data?.error || 'Erreur');
     }
   };
 
-  const headers = ['Title', 'Description'];
+  const headers = ['Titre', 'Description'];
   const data = registrations.map(reg => ({
-    title: reg.Event.title,
+    titre: reg.Event.title,
     description: reg.Event.description
   }));
 
-  const actions = (reg) => <button onClick={() => cancel(reg.id)}>Cancel</button>;
+  const actions = (reg) => <button onClick={() => cancel(reg.id)}>Annuler</button>;
 
   return (
     <div>
-      <h2>My Registrations</h2>
+      <h2>Mes Inscriptions</h2>
       <Table headers={headers} data={data} actions={actions} />
     </div>
   );

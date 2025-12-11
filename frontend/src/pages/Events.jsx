@@ -25,27 +25,27 @@ const Events = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchEvents();
-      alert('Registered successfully');
+      alert('Inscription réussie');
     } catch (error) {
-      alert(error.response?.data?.error || 'Error');
+      alert(error.response?.data?.error || 'Erreur');
     }
   };
 
-  const headers = ['Title', 'Description', 'Date', 'Participants'];
+  const headers = ['Titre', 'Description', 'Date', 'Participants'];
   const data = events.map(event => ({
-    title: event.title,
+    titre: event.title,
     description: event.description,
-    date: new Date(event.date).toLocaleDateString(),
+    date: new Date(event.date).toLocaleDateString('fr-FR'),
     participants: `${event.currentParticipants}/${event.maxParticipants}`
   }));
 
   const actions = (event) => (
-    event.currentParticipants < event.maxParticipants ? <button onClick={() => register(event.id)}>Register</button> : 'Full'
+    event.currentParticipants < event.maxParticipants ? <button onClick={() => register(event.id)}>S'inscrire</button> : 'Complet'
   );
 
   return (
     <div>
-      <h2>Events</h2>
+      <h2>Événements</h2>
       <Table headers={headers} data={data} actions={actions} />
     </div>
   );
