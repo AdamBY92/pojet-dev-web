@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './GenericModal.css';
 
 /**
@@ -27,10 +27,12 @@ const GenericModal = ({
   const [formData, setFormData] = useState(initialData);
   const [errors, setErrors] = useState({});
 
-  // Réinitialiser le formulaire quand initialData change
-  useState(() => {
-    setFormData(initialData);
-    setErrors({});
+  // Réinitialiser le formulaire quand initialData ou isOpen change
+  useEffect(() => {
+    if (isOpen) {
+      setFormData(initialData);
+      setErrors({});
+    }
   }, [initialData, isOpen]);
 
   const handleChange = (e) => {
