@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import DataTable from '../components/Table';
 import './MyRegistrations.css';
@@ -135,9 +136,9 @@ const MyRegistrations = () => {
       {!loading && registrations.length === 0 && !error && (
         <div className="empty-state">
           <p>Vous n'êtes inscrit à aucun événement pour le moment.</p>
-          <a href="/events" className="btn btn-primary">
+          <Link to="/" className="btn btn-primary">
             Découvrir les événements
-          </a>
+          </Link>
         </div>
       )}
     </div>
