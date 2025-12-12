@@ -44,38 +44,52 @@ git clone https://github.com/AdamBY92/pojet-dev-web
 cd pojet-dev-web
 ```
 
-### 2. Configuration de la base de données
+### 2. Configuration de la base de données PostgreSQL
 
-Créez une base de données PostgreSQL :
+⚠️ **Important** : Chaque développeur doit avoir PostgreSQL installé localement.
 
-```sql
-CREATE DATABASE events_app;
+**Créez la base de données :**
+
+```bash
+# Windows avec psql dans le PATH
+psql -U postgres -c "CREATE DATABASE event_management;"
+
+# OU avec le chemin complet (adapter selon votre version)
+& 'C:\Program Files\PostgreSQL\XX\bin\psql.exe' -U postgres -c "CREATE DATABASE event_management;"
 ```
 
 ### 3. Configuration du backend
 
+**Copiez le fichier d'exemple :**
+
 ```bash
 cd backend
-cp .env.example .env  # Si disponible
+cp .env.example .env
 ```
 
-Modifiez le fichier `.env` :
+**Modifiez le fichier `.env` avec VOS identifiants PostgreSQL :**
 
-```
-DATABASE_URL=postgresql://user:password@localhost:5432/events_app
-JWT_SECRET=votre_secret_jwt_tres_securise
+```env
+DATABASE_URL=postgresql://postgres:VOTRE_MOT_DE_PASSE@localhost:5432/event_management
+JWT_SECRET=super_secret_jwt_key_2025_dev_web_project
 PORT=5000
-NODE_ENV=development
 ```
 
-Installez les dépendances et démarrez :
+⚠️ **Remplacez `VOTRE_MOT_DE_PASSE` par votre mot de passe PostgreSQL réel !**
+
+**Installez les dépendances et initialisez la base de données :**
 
 ```bash
 npm install
+node scripts/seed.js  # Crée les tables et données de test
 npm run dev
 ```
 
 Le backend sera accessible sur `http://localhost:5000`
+
+**Comptes de test créés par le seed :**
+- Admin : `admin@app.com` / `Admin123!`
+- User : `user@app.com` / `User123!`
 
 ### 4. Configuration du frontend
 
